@@ -1,3 +1,6 @@
+import argparse
+from pathlib import Path
+
 class DancingLinksNode:
     def __init__(self, row_idx=None, col_idx=None, column=None):
         self.row_idx = row_idx
@@ -166,20 +169,37 @@ def solve_hyper_sudoku(grid):
     if not dancing_links.search():
         print("No solution found.")
 
-# Example grid setup
-initial_grid = [
-    [0, 0, 0, 0, 0, 0, 0, 3, 0],
-    [3, 0, 9, 0, 0, 0, 0, 2, 0],
-    [8, 0, 7, 0, 0, 0, 9, 6, 0],
-    [0, 1, 0, 0, 0, 4, 3, 0, 6],
-    [0, 0, 6, 0, 0, 0, 0, 0, 0],
-    [0, 7, 5, 1, 0, 0, 0, 0, 9],
-    [0, 8, 0, 0, 4, 0, 0, 0, 0],
-    [0, 4, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 5, 0, 0, 0, 0, 2]
-]
-
-# initial_grid = [[0 for _ in range(9)] for _ in range(9)]
 
 
-solve_hyper_sudoku(initial_grid)
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('filename', type=Path, help='Path to sudoku text file.')
+
+    args = parser.parse_args()
+
+    with args.filename.open('r') as f:
+        grid = [list(map(int, x.strip().split(' '))) for x in f.readlines()]
+
+    # Example grid setup
+    initial_grid = [
+        [0, 0, 0, 0, 0, 0, 0, 3, 0],
+        [3, 0, 9, 0, 0, 0, 0, 2, 0],
+        [8, 0, 7, 0, 0, 0, 9, 6, 0],
+        [0, 1, 0, 0, 0, 4, 3, 0, 6],
+        [0, 0, 6, 0, 0, 0, 0, 0, 0],
+        [0, 7, 5, 1, 0, 0, 0, 0, 9],
+        [0, 8, 0, 0, 4, 0, 0, 0, 0],
+        [0, 4, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 5, 0, 0, 0, 0, 2]
+    ]
+
+    # initial_grid = [[0 for _ in range(9)] for _ in range(9)]
+
+    solve_hyper_sudoku(initial_grid)
+
+
+if __name__ == "__main__":
+    main()
+
+
