@@ -1,6 +1,8 @@
+import matplotlib.pyplot as plt
+from matplotlib.table import Table
+import time
 import argparse
 from pathlib import Path
-
 class DancingLinksNode:
     def __init__(self, row_idx=None, col_idx=None, column=None):
         self.row_idx = row_idx
@@ -22,8 +24,47 @@ class DancingLinks:
         self.columns = [DancingLinksColumn(i) for i in range(self.num_constraints)]
         self.head = DancingLinksNode()
         self.solution = []
+        self.grid = grid
+        self.fig, self.ax = plt.subplots(figsize=(6, 6))
+        self.table = self.initialize_table(grid)
+        plt.ion()
+        plt.show()
+        self.update_table(grid)  # Update the visual table with the initial grid
+        time.sleep(2)  # Pause for 2 seconds to view the initial grid
         self.setup_linked_grid(grid)
         self.link_headers()
+
+    def initialize_table(self, grid):
+        self.ax.set_axis_off()
+        table = Table(self.ax, bbox=[0, 0, 1, 1])
+        cell_size = 1.0 / self.base_size
+
+        # Define hyper-box regions for shading
+        hyper_boxes = [(1, 1), (1, 5), (5, 1), (5, 5)]
+
+        for i in range(self.base_size):
+            for j in range(self.base_size):
+                value = str(grid[i][j]) if grid[i][j] != 0 else ''
+                is_hyper = any(
+                    box[0] <= i < box[0] + 3 and box[1] <= j < box[1] + 3
+                    for box in hyper_boxes
+                )
+                facecolor = 'lightgrey' if is_hyper else 'white'
+                textColor = 'blue' if value != '' else 'black'
+                cell = table.add_cell(i, j, cell_size, cell_size, text=value, loc='center',
+                                      facecolor=facecolor, edgecolor='black')
+                cell.get_text().set_fontsize(14)  # Adjust font size for better visibility
+                cell.get_text().set_color(textColor)
+        self.ax.add_table(table)
+        return table
+
+    def update_table(self, grid):
+        for i in range(self.base_size):
+            for j in range(self.base_size):
+                value = str(grid[i][j]) if grid[i][j] != 0 else ''
+                cell = self.table.get_celld()[(i, j)]
+                cell.get_text().set_text(value)
+        plt.pause(0.5)
 
     def setup_linked_grid(self, grid):
         # Iterate over all possible positions and numbers
@@ -157,8 +198,9 @@ class DancingLinks:
             j = row_idx // self.base_size
             n = row_idx % self.base_size + 1
             solved_grid[i][j] = n
+            self.update_table(solved_grid)
         self.print_grid(solved_grid)
-        
+
     def print_grid(self, grid):
         for row in grid:
             print(" ".join(str(num) if num != 0 else '.' for num in row))
@@ -169,36 +211,17 @@ def solve_hyper_sudoku(grid):
     if not dancing_links.search():
         print("No solution found.")
 
-
-
-
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('filename', type=Path, help='Path to sudoku text file.')
-
+ 
     args = parser.parse_args()
-
+ 
     with args.filename.open('r') as f:
         grid = [list(map(int, x.strip().split(' '))) for x in f.readlines()]
-
-    # print("GRID:::",grid)
-    # Example grid setup
-    # initial_grid = [
-    #     [0, 0, 0, 0, 0, 0, 0, 3, 0],
-    #     [3, 0, 9, 0, 0, 0, 0, 2, 0],
-    #     [8, 0, 7, 0, 0, 0, 9, 6, 0],
-    #     [0, 1, 0, 0, 0, 4, 3, 0, 6],
-    #     [0, 0, 6, 0, 0, 0, 0, 0, 0],
-    #     [0, 7, 5, 1, 0, 0, 0, 0, 9],
-    #     [0, 8, 0, 0, 4, 0, 0, 0, 0],
-    #     [0, 4, 0, 0, 0, 0, 0, 0, 0],
-    #     [0, 0, 0, 5, 0, 0, 0, 0, 2]
-    # ]
 
     solve_hyper_sudoku(grid)
 
 
 if __name__ == "__main__":
     main()
-
-
