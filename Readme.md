@@ -1,4 +1,4 @@
-# Hyper Sudoku Solver using Dancing Links
+# Hyper HyperSudoku Solver using Dancing Links
 
 ## Table of Contents
 
@@ -19,32 +19,34 @@
 
 ## Project Overview
 
-This project implements a **Hyper Sudoku Solver** using the **Dancing Links** algorithm, an efficient technique for solving exact cover problems. The solver not only handles standard Sudoku puzzles but also incorporates additional constraints specific to Hyper Sudoku, providing a more challenging and comprehensive solving experience.
+This project implements a **Hyper HyperSudoku Solver** using the **Dancing Links** algorithm, an efficient technique for solving exact cover problems. The solver not only handles standard HyperSudoku puzzles but also incorporates additional constraints specific to Hyper HyperSudoku, providing a more challenging and comprehensive solving experience.
 
 ## Implementation
 
 ### Algorithm Selection
 
-The core of this project is based on **Donald Knuth's Dancing Links (DLX)** algorithm, renowned for its efficiency in solving exact cover problems such as Sudoku. The DLX algorithm employs a clever data structure that allows for rapid backtracking and solution finding.
+The core of this project is based on **Donald Knuth's Dancing Links (DLX)** algorithm, renowned for its efficiency in solving exact cover problems such as HyperSudoku. The DLX algorithm employs a clever data structure that allows for rapid backtracking and solution finding.
 
 - **Dancing Links (DLX):** Utilizes a sparse matrix representation with circular doubly-linked lists to represent constraints and possible assignments. This structure enables efficient covering and uncovering of constraints during the search process.
 
 ### Caveats and Additional Constraints
 
-- **Hyper Sudoku Support:** Unlike standard Sudoku, Hyper Sudoku includes four additional 3x3 regions that must also contain all digits from 1 to 9 without repetition. The solver accommodates these extra constraints by dynamically adjusting the exact cover matrix based on provided hyper box positions.
+- **Hyper HyperSudoku Support:** Unlike standard HyperSudoku, Hyper HyperSudoku includes four additional 3x3 regions that must also contain all digits from 1 to 9 without repetition. The solver accommodates these extra constraints by dynamically adjusting the exact cover matrix based on provided hyper box positions.
   
-- **Dynamic Hyper Boxes:** Users can define the positions of hyper boxes, allowing flexibility in solving various Sudoku variants that incorporate different additional regions.
+- **Dynamic Hyper Boxes:** Users can define the positions of hyper boxes, allowing flexibility in solving various HyperSudoku variants that incorporate different additional regions.
 
 ### Visualization
 
-The current implementation provides console-based visualization by printing the solved Sudoku grid in a readable format. Each cell is displayed with its corresponding number, and empty cells (if any) are represented by dots (`.`). Future enhancements can include graphical interfaces or web-based visualizations to demonstrate the algorithm's execution step-by-step.
+The current implementation provides console-based visualization by printing the solved HyperSudoku grid in a readable format. Each cell is displayed with its corresponding number, and empty cells (if any) are represented by dots (`.`). 
+
+The graphical visualization implemented using matplotlib opens a pop-up window to first show the input puzzle and then begins by displaying the code execute, solving the HyperSudoku puzzle in a step by step manner.
 
 ## Input Specifications
 
 ### Input Format
 
-- **Grid Representation:** The Sudoku puzzle is represented as a 9x9 grid.
-- **File Format:** Inputs are provided via a text file where each line corresponds to a row in the Sudoku grid.
+- **Grid Representation:** The HyperSudoku puzzle is represented as a 9x9 grid.
+- **File Format:** Inputs are provided via a text file where each line corresponds to a row in the HyperSudoku grid.
 - **Cell Delimiter:** Cells within a row are separated by spaces.
 - **Empty Cells:** Represented by `0`.
 
@@ -66,7 +68,7 @@ The current implementation provides console-based visualization by printing the 
 - **File Input:** Users must create a text file (`.txt`) following the format described above.
 - **Command-Line Argument:** The file path is provided as a command-line argument when running the program.
 
-**Example File Name:** `sudoku_puzzle.txt`
+**Example File Name:** `grid_1.txt`
 
 ## Installation
 
@@ -78,8 +80,8 @@ The current implementation provides console-based visualization by printing the 
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/hyper-sudoku-solver.git
-   cd hyper-sudoku-solver
+   git clone https://github.com/botchway44/CS5100-hypersudoku-solver
+   cd CS5100-hypersudoku-solver
    ```
 
 2. **(Optional) Create a Virtual Environment:**
@@ -89,24 +91,28 @@ The current implementation provides console-based visualization by printing the 
    ```
 
 3. **Install Dependencies:**
-   This project uses only Python's standard libraries, so no additional packages are required.
+   Matplotlib Library needs to be installed for the code to run
+   Command for Python 3 users - 
+   ```bash
+   pip3 install matplotlib
+   ```
 
 ## Usage
 
 ### Running the Solver
 
-Execute the script via the command line, providing the path to your Sudoku puzzle file as an argument.
+Execute the script via the command line, providing the path to your HyperSudoku puzzle file as an argument.
 
 ```bash
-python sudoku.py path/to/sudoku_puzzle.txt
+python3 HyperSudoku.py grids/grid_1.txt
 ```
 
 ### Example
 
-Given an input file named `sudoku_puzzle.txt` located in the project directory, run:
+Given an input file named `grid_1.txt` located in the project directory, run:
 
 ```bash
-python sudoku.py sudoku_puzzle.txt
+python3 HyperSudoku.py grid_1.txt
 ```
 
 **Sample Output:**
@@ -122,7 +128,7 @@ python sudoku.py sudoku_puzzle.txt
 7 9 4 5 1 6 6 4 2
 ```
 
-*Note: The above output is for illustrative purposes. Ensure your input puzzle has a unique solution.*
+[r5](https://user-images.githubusercontent.com/35941942/173422917-676eb4ed-28a5-4817-ab94-f2ab4ebfb101.png)
 
 ## Dependencies
 
@@ -130,7 +136,8 @@ This project utilizes Python's standard libraries:
 
 - `argparse`: For parsing command-line arguments.
 - `pathlib`: For handling file paths.
+- `time` : For timing the visualization
 
 No external libraries are required, ensuring ease of installation and compatibility.
-
-
+Except
+- `Matplotlib` : For visualization
