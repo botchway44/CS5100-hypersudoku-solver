@@ -1,4 +1,4 @@
-# Hyper HyperSudoku Solver using Dancing Links
+# HyperSudoku Solver using Dancing Links
 
 ## Table of Contents
 
@@ -19,7 +19,7 @@
 
 ## Project Overview
 
-This project implements a **Hyper HyperSudoku Solver** using the **Dancing Links** algorithm, an efficient technique for solving exact cover problems. The solver not only handles standard HyperSudoku puzzles but also incorporates additional constraints specific to Hyper HyperSudoku, providing a more challenging and comprehensive solving experience.
+This project implements a **HyperSudoku Solver** using the **Dancing Links** algorithm, an efficient technique for solving exact cover problems. The solver not only handles standard Sudoku puzzles but also incorporates additional constraints specific to HyperSudoku, providing a more challenging and comprehensive solving experience.
 
 ## Implementation
 
@@ -31,9 +31,9 @@ The core of this project is based on **Donald Knuth's Dancing Links (DLX)** algo
 
 ### Caveats and Additional Constraints
 
-- **Hyper HyperSudoku Support:** Unlike standard HyperSudoku, Hyper HyperSudoku includes four additional 3x3 regions that must also contain all digits from 1 to 9 without repetition. The solver accommodates these extra constraints by dynamically adjusting the exact cover matrix based on provided hyper box positions.
+- **HyperSudoku Support:** Unlike standard Sudoku, HyperSudoku includes four additional 3x3 regions that must also contain all digits from 1 to 9 without repetition. The solver accommodates these extra constraints by dynamically adjusting the exact cover matrix based on provided hyper box positions.
   
-- **Dynamic Hyper Boxes:** Users can define the positions of hyper boxes, allowing flexibility in solving various HyperSudoku variants that incorporate different additional regions.
+- **Dynamic Hyper Boxes:** Users can define the positions of hyper boxes, allowing flexibility in solving various Sudoku variants that incorporate different additional regions.
 
 ### Visualization
 
@@ -104,7 +104,7 @@ The graphical visualization implemented using matplotlib opens a pop-up window t
 Execute the script via the command line, providing the path to your HyperSudoku puzzle file as an argument.
 
 ```bash
-python3 HyperSudoku.py grids/grid_1.txt
+python3 sudoku.py grids/grid_1.txt
 ```
 
 ### Example
@@ -112,7 +112,7 @@ python3 HyperSudoku.py grids/grid_1.txt
 Given an input file named `grid_1.txt` located in the project directory, run:
 
 ```bash
-python3 HyperSudoku.py grid_1.txt
+python3 sudoku.py grid_1.txt
 ```
 
 **Sample Output:**
@@ -128,7 +128,7 @@ python3 HyperSudoku.py grid_1.txt
 7 9 4 5 1 6 6 4 2
 ```
 
-[r5](https://user-images.githubusercontent.com/35941942/173422917-676eb4ed-28a5-4817-ab94-f2ab4ebfb101.png)
+<img src="./Image/image.png"/>
 
 ## Dependencies
 
